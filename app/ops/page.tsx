@@ -454,11 +454,14 @@ export default function OpsDashboard() {
   // ═══════════════════════════════════════════════════════════════════
   // DERIVED KPI VALUES
   // ═══════════════════════════════════════════════════════════════════
-  const gross = Number(salesForm.gross) || 0
   const tx = Number(salesForm.transactions) || 0
   const card = Number(salesForm.card) || 0
   const cash = Number(salesForm.cash) || 0
   const online = Number(salesForm.online) || 0
+  const grossInput = Number(salesForm.gross) || 0
+  const paymentsTotal = card + cash + online
+  // If "brutto" is not provided, fall back to sum of payment methods
+  const gross = grossInput > 0 ? grossInput : paymentsTotal
   const planGross = Number(salesForm.targetGross) || 0
   const planTx = Number(salesForm.targetTx) || 0
   const netManual = Number(salesForm.netRevenue) || 0
